@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -78,13 +77,12 @@ public class ChatRoom extends AppCompatActivity {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
                 if(viewType == 0){
-                    SentMessageBinding sentBinding = SentMessageBinding.inflate(inflater, parent, false);
+                    SentMessageBinding sentBinding = SentMessageBinding.inflate(getLayoutInflater());
                     return new MyRowHolder(sentBinding.getRoot());
                 } else{
-                    ReceiveMessageBinding receiveBinding = ReceiveMessageBinding.inflate(inflater, parent, false);
+                    ReceiveMessageBinding receiveBinding = ReceiveMessageBinding.inflate(getLayoutInflater());
                     return new MyRowHolder(receiveBinding.getRoot());
                 }
 
@@ -106,6 +104,7 @@ public class ChatRoom extends AppCompatActivity {
 
             public int getItemViewType(int position){
                 ChatMessage obj = messages.get(position);
+
                 return obj.isSentButton() ? 0 : 1; }
         });
     }
